@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Object Detection</title>
+    <title>AR with Object Detection</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- AR and 3D model related scripts -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- Object detection related scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,9 +60,22 @@
 </head>
 <body>
     <div id="canvas-container">
+        <!-- AR Scene -->
+        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+            <a-assets>
+                <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/aARdeLife/try/445a176e3ba5de276023a0aacc08f31f306ee952/polforweb%20(3)%20(3).glb"></a-asset-item>
+            </a-assets>
+            <a-entity gltf-model="#animated-asset"></a-entity>
+            <a-marker-camera preset='hiro'></a-marker-camera>
+        </a-scene>
+        <!-- Video for Object Detection -->
         <video id="video" autoplay></video>
         <canvas id="canvas"></canvas>
     </div>
+    <!-- AR.js script -->
+    <script src="main.js"></script>
+    <!-- TensorFlow.js object detection script -->
     <script src="app.js"></script>
 </body>
 </html>
+
